@@ -13,57 +13,117 @@ char passwrd()
 void main()
 {
   FILE *btr = NULL;
-  int i = 0, c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
+  int i = 0, len, *ptr = NULL;
   char ch, temp = '1';
-  char pass[8], pur[60];
+  char pass[8], pur[50];
   system("cls");
   printf("\t\t========== Welcome To Password Generated Program ==========\n");
-  printf("\t Please wait for a while, Password is creating by the password generator...\n");
-  while (i < 6)
+  printf("\t  Enter the length of the password : ");
+  scanf("%d", &len);
+  printf("\t  Please wait for a while, Password is creating by the password generator...\n");
+  switch (len)
   {
-    ch = passwrd();
-    if (temp != ch) // This logic exibhit the repetation of the character.
+  case 6:
+  {
+    ptr = (int *)calloc(len, sizeof(int));
+    while (i < 6)
     {
-      if (ch >= 65 && ch <= 90)
+      ch = passwrd();
+      if (temp != ch) // This logic exibhit the repetation of the character.
       {
-        if (c1 < 1 || c5 < 2)
+        if (ch >= 65 && ch <= 90)
         {
-          pass[i] = ch;
-          i++;
-          c1++;
-          c5++;
+          if (ptr[0] < 1 || ptr[4] < 2)
+          {
+            pass[i] = ch;
+            i++;
+            ptr[0]++;
+            ptr[4]++;
+          }
+        }
+        else if (ch >= 97 && ch <= 122)
+        {
+          if (ptr[1] < 1 || ptr[5] < 2)
+          {
+            pass[i] = ch;
+            i++;
+            ptr[1]++;
+            ptr[5]++;
+          }
+        }
+        else if (ch >= 33 && ch <= 47 || ch >= 58 && ch <= 64 || ch >= 91 && ch >= 96 || ch >= 123 && ch >= 126)
+        {
+          if (ptr[2] < 1)
+          {
+            pass[i] = ch;
+            i++;
+            ptr[2]++;
+          }
+        }
+        else if (ch >= 48 && ch <= 57)
+        {
+          if (ptr[3] < 1)
+          {
+            pass[i] = ch;
+            i++;
+            ptr[3]++;
+          }
         }
       }
-      else if (ch >= 97 && ch <= 122)
-      {
-        if (c2 < 1 || c6 < 2)
-        {
-          pass[i] = ch;
-          i++;
-          c2++;
-          c6++;
-        }
-      }
-      else if (ch >= 33 && ch <= 47 || ch >= 58 && ch <= 64 || ch >= 91 && ch >= 96 || ch >= 123 && ch >= 126)
-      {
-        if (c3 < 1)
-        {
-          pass[i] = ch;
-          i++;
-          c3++;
-        }
-      }
-      else if (ch >= 48 && ch <= 57)
-      {
-        if (c4 < 1)
-        {
-          pass[i] = ch;
-          i++;
-          c4++;
-        }
-      }
+      temp = ch;
     }
-    temp = ch;
+    free(ptr);
+  }
+
+  case 4:
+  {
+    ptr = (int *)calloc(len, sizeof(int));
+    while (i < 4)
+    {
+      ch = passwrd();
+      if (temp != ch) // This logic exibhit the repetation of the character.
+      {
+        if (ch >= 65 && ch <= 90)
+        {
+          if (ptr[0] < 1)
+          {
+            pass[i] = ch;
+            i++;
+            ptr[0]++;
+          }
+        }
+        else if (ch >= 97 && ch <= 122)
+        {
+          if (ptr[1] < 1)
+          {
+            pass[i] = ch;
+            i++;
+            ptr[1]++;
+          }
+        }
+        else if (ch >= 33 && ch <= 47 || ch >= 58 && ch <= 64 || ch >= 91 && ch >= 96 || ch >= 123 && ch >= 126)
+        {
+          if (ptr[2] < 1)
+          {
+            pass[i] = ch;
+            i++;
+            ptr[2]++;
+          }
+        }
+        else if (ch >= 48 && ch <= 57)
+        {
+          if (ptr[3] < 1)
+          {
+            pass[i] = ch;
+            i++;
+            ptr[3]++;
+          }
+        }
+      }
+      temp = ch;
+    }
+    free(ptr);
+  }
   }
   pass[i] = '\0';
   printf("The password is : ");
@@ -80,5 +140,6 @@ void main()
     fprintf(btr, "Time is %s\n", __TIME__);
     fprintf(btr, "Purpose is %s\n", pur);
     fprintf(btr, "Password is %s", pass);
+    fclose(btr);
   }
 }
