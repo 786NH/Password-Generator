@@ -18,7 +18,7 @@ void main()
   char pass[8], pur[50];
   system("cls");
   printf("\t\t========== Welcome To Password Generated Program ==========\n");
-  printf("\t  Enter the length of the password : ");
+  printf("\t  Enter the length of the password(4 or 6) : ");
   scanf("%d", &len);
   printf("\t  Please wait for a while, Password is creating by the password generator...\n");
   switch (len)
@@ -73,6 +73,7 @@ void main()
       temp = ch;
     }
     free(ptr);
+    break;
   }
 
   case 4:
